@@ -4,22 +4,22 @@ public class Policy{
    private String firstName;
    private String lastName;
    private int age;
-   private int smokingStatus;
+   private String smokingStatus;
    private double height;
    private double weight;
    //no arg constructor
-   public void Policy(){
+   public Policy(){
       policyNumber = 0;
-      providerName = ("");
-      firstName = ("");
-      lastName = ("");
+      providerName = (" ");
+      firstName = (" ");
+      lastName = (" ");
       age = 0;
-      smokingStatus = 0;
-      height = 0;
-      weight = 0;
+      smokingStatus = (" ");
+      height = 0.00;
+      weight = 0.00;
    }//end no arg constructor
    //constructor that accepts arguments
-   public void Policy(int policy, String provider, String first, String last, int a, int smoking, double h, double w){
+   public Policy(int policy, String provider, String first, String last, int a, String smoking, double h, double w){
       policyNumber = policy;
       providerName = provider;
       firstName = first;
@@ -57,7 +57,7 @@ public class Policy{
    }//end setAge method
    
    //setSmokingStatus method
-   public void setSmokingStatus(int smoking){
+   public void setSmokingStatus(String smoking){
       smokingStatus = smoking;
    }//end setSmokingStatus method
    
@@ -97,7 +97,7 @@ public class Policy{
    }//end getAge method
    
    //getSmokingStatus method
-   public int getSmokingStatus(){
+   public String getSmokingStatus(){
       return smokingStatus;
    }//end getSmokingStatus method
    
@@ -111,37 +111,33 @@ public class Policy{
       return weight;
    }//end getWeight method
    
-   public double calculateBMI(){
-   double BMI = (weight * 703)/(height^2);
+   public double getBMI(){
+   double BMI = (weight * 703)/(height * height);
    return BMI;
    }
    
-   public double calculatePrice(){
+   public double getPrice(){
       double basePrice = 600.00;
-      if(age > 50)
+      double price = 0;
+      double BMI = getBMI();
+      if(age > 50){
          price = basePrice + 75.00;
-      else
-         price = basePrice
-      if(smokingStatus == 1){
+         }
+      else{
+         price = basePrice;
+         }
+      if(smokingStatus.equalsIgnoreCase("smoker")){
             price = price + 100.00;
          }
-      else
+      else{
          price = price;
-      if(BMI > 35){
+         }
+      if( BMI > 35){
          price = price + ((BMI-35) * 20);
-      else
-         price  = price
+         }
+      else{
+         price = price;
+         }
+         return price;
       }
-   }
-
-
-
-
-
-
-
-
-
-
-   
-}//end Policy class
+   }//end Policy class
