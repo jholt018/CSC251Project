@@ -1,8 +1,10 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.io.*;
 //demo class
 public class Project_jacob_holt{
    //main method
-   public static void main(String[] args){
+   public static void main(String[] args) throws IOExeption{
    //declare local variables
       int policyNumber;
       String providerName;
@@ -12,36 +14,35 @@ public class Project_jacob_holt{
       String smokingStatus;
       double height;
       double weight;
-      //create scanner object
-      Scanner keyboard = new Scanner(System.in);
+      //create file object
+      File file = new File("PolicyInformation.txt");
+      Scanner inputFile = new Scanner(file);
+      while(inputFile.hasNext()){
       
-      System.out.print("Please enter the Policy Number: ");
-      policyNumber = keyboard.nextInt();
-      
-      keyboard.nextLine();//skip to next line
-      
-      System.out.print("\nPlease enter the Provider Name: ");
+      policyNumber = inputFile.nextLine();
+           
       providerName = keyboard.nextLine();
       
-      System.out.print("\nPlease enter the Policyholder's First Name: ");
       firstName = keyboard.nextLine();
       
-      System.out.print("\nPlease enter the Policyholder's Last Name: ");
       lastName = keyboard.nextLine();
       
-      System.out.print("\nPlease enter the Policyholder's Age: ");
-      age = keyboard.nextInt();
-      keyboard.nextLine();//skip to next line
-      System.out.print("\nPlease enter the Policyholder's Smoking Status (smoker/non-smoker): ");
+      age = keyboard.nextLine();
       smokingStatus = keyboard.nextLine();
       
-      System.out.print("\nPlease enter the Policyholder's Height (in inches): ");
-      height = keyboard.nextDouble();
+      height = keyboard.nextLine();
       
-      System.out.print("\nPlease enter the Policyholder's Weight (in pounds): ");
-      weight = keyboard.nextDouble();
+      weight = keyboard.nextLine();
+      
       //create Policy object
       Policy policy = new Policy(policyNumber, providerName, firstName, lastName, age, smokingStatus, height, weight);
+      //Create arraylist
+      ArrayList<Policy> array = new ArrayList<>();
+      
+      array.add(policy);      
+      
+      }
+      
       //display information
       System.out.println("Policy Number: " + policy.getPolicyNumber());
       System.out.println("Provider Name: " + policy.getProviderName());
