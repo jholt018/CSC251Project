@@ -1,4 +1,5 @@
 public class Policy{
+   private static int instanceCount = 0;
    private int policyNumber;
    private String providerName;
    private PolicyHolder policyHolder = new PolicyHolder();
@@ -9,7 +10,7 @@ public class Policy{
    public Policy(){
       policyNumber = 0;
       providerName = (" ");
-      policyHolder = null;
+      instanceCount++;
          }//end no arg constructor
    
    //constructor that accepts arguments
@@ -25,7 +26,7 @@ public class Policy{
       policyNumber = policy;
       providerName = provider;
       policyHolder = holder;
-      
+      instanceCount++;
 
    }//end contructor method with arguments
    
@@ -104,10 +105,22 @@ public class Policy{
          }
          return price;
       }
+      public int getInstanceCount(){
+         return instanceCount;
+      }
+      public PolicyHolder getPolicyHolder(){
+         return policyHolder;
+      }
       public String toString(){
-         return "\nPolicy Number: " + getPolicyNumber() +
-         "\nProvider Name: " + getProviderName() + policyHolder +
-         "\nPolicyholder's BMI: " + getBMI() +
-         "\nPolicy Price: $" + getPrice() + "\n\n";
+         return String.format("\nPolicy Number: %s" + 
+         "\nProvider Name: %s" + "%s" +
+         "\nPolicyholder's BMI: %.2f" +
+         "\nPolicy Price: $%.2f" + "\n\n",
+         getPolicyNumber(), 
+         getProviderName(), 
+         policyHolder, 
+         getBMI(), 
+         getPrice()
+         );
       }
    }//end Policy class

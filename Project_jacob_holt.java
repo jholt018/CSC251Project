@@ -65,14 +65,18 @@ public class Project_jacob_holt{
          System.out.print(policy);
          
       }
+      if(!policies.isEmpty()){
+         System.out.print("There were " + policies.get(0).getInstanceCount() + " Policy objects created");
+      }
       //new policyholder object
       PolicyHolder smoker = new PolicyHolder();
       //count how many smokers and non-smokers
       int smokers = 0;
       int nonSmokers = 0;
-      String smoking = smoker.getSmokingStatus();
+      
       for(Policy policy : policies) {
-         if(smoking.equalsIgnoreCase("smoker")) {
+      String status = policy.getPolicyHolder().getSmokingStatus();
+         if(status.equalsIgnoreCase("smoker")) {
             smokers++;
          } else {
             nonSmokers++;
