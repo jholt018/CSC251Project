@@ -40,8 +40,10 @@ public class Project_jacob_holt{
             weight = Double.parseDouble(inputFile.nextLine().trim());
             
             
-            //create Policy object
-            Policy policy = new Policy(policyNumber, providerName, firstName, lastName, age, smokingStatus, height, weight);
+            //create Policy object and policyHolder object
+            PolicyHolder holder = new PolicyHolder(firstName, lastName, age, smokingStatus, height, weight);
+            
+            Policy policy = new Policy(policyNumber, providerName, holder);
             policies.add(policy);
                
          }
@@ -60,24 +62,17 @@ public class Project_jacob_holt{
       //iterate through policies
       for(Policy policy : policies)
       {
-         System.out.println("Policy Number: " + policy.getPolicyNumber());
-         System.out.println("Provider Name: " + policy.getProviderName());
-         System.out.println("Policyholder's First Name: " + policy.getFirstName());
-         System.out.println("Policyholder's Last Name: " + policy.getLastName());
-         System.out.println("Policyholder's Smoking Status: " + policy.getSmokingStatus());
-         System.out.printf("Policyholder's Height: %.1f" , policy.getHeight());
-         System.out.printf("\nPolicyholder's Weight: %.1f" , policy.getWeight());
-         System.out.printf("\nPolicyholder's BMI: %.2f" , policy.getBMI());
-         System.out.printf("\nPolicy Price: $%,.2f" , policy.getPrice());
-         System.out.println("\n\n");
+         System.out.print(policy);
          
       }
+      //new policyholder object
+      PolicyHolder smoker = new PolicyHolder();
       //count how many smokers and non-smokers
       int smokers = 0;
       int nonSmokers = 0;
-      
+      String smoking = smoker.getSmokingStatus();
       for(Policy policy : policies) {
-         if(policy.getSmokingStatus().equalsIgnoreCase("smoker")) {
+         if(smoking.equalsIgnoreCase("smoker")) {
             smokers++;
          } else {
             nonSmokers++;

@@ -1,49 +1,31 @@
 public class Policy{
    private int policyNumber;
    private String providerName;
-   private String firstName;
-   private String lastName;
-   private int age;
-   private String smokingStatus;
-   private double height;
-   private double weight;
-   //no arg constructor
+   private PolicyHolder policyHolder = new PolicyHolder();
+      //no arg constructor
    /** 
       no argument constructor class
    */
    public Policy(){
       policyNumber = 0;
       providerName = (" ");
-      firstName = (" ");
-      lastName = (" ");
-      age = 0;
-      smokingStatus = (" ");
-      height = 0.00;
-      weight = 0.00;
-   }//end no arg constructor
+      policyHolder = null;
+         }//end no arg constructor
    
    //constructor that accepts arguments
    /** 
       with argument constructor class
       @param policy policy number
       @param provider providers name
-      @param first policyholder first name
-      @param last policyholder last name
-      @param a policyholder age
-      @param smoking policyholder smoking status
-      @param  h policyholder height
-      @param w policyholder weight
+      @param policyHolder policy holder info
+      
    */
 
-   public Policy(int policy, String provider, String first, String last, int a, String smoking, double h, double w){
+   public Policy(int policy, String provider, PolicyHolder holder){
       policyNumber = policy;
       providerName = provider;
-      firstName = first;
-      lastName = last;
-      age = a;
-      smokingStatus = smoking;
-      height = h;
-      weight = w;
+      policyHolder = holder;
+      
 
    }//end contructor method with arguments
    
@@ -66,65 +48,7 @@ public class Policy{
       providerName = provider;
    }//end setProviderName method
    
-   //setFirstName method
-   /**
-      method that sets first name
-      @param first policyholder first name
-   */
-   public void setFirstName(String first){
-      firstName = first;
-   }//end setFirstName method
    
-   //setLastName method
-   /**
-      method that sets last name
-      @param last policyholder last name
-   */
-   public void setLastName(String last){
-      lastName = last;
-   }//end setLastName method
-   
-   //setAge method
-   /**
-      method that sets age
-      @param a policyholder age
-   */
-   public void setAge(int a){
-      age = a;
-   }//end setAge method
-   
-   //setSmokingStatus method
-   /**
-      method that sets smoking status
-      @param smoking policyholder smoking status
-   */
-   public void setSmokingStatus(String smoking){
-      smokingStatus = smoking;
-   }//end setSmokingStatus method
-   
-   //setHeight method
-   /**
-      method that sets policyholder height
-      @param h policyholder height
-   */
-   public void setHeight(double h){
-      height = h;
-   }//end setHeight method
-   
-   //setWeight method
-   /**
-      method that sets weight
-      @param w policyholder weight
-   */
-   public void setWeight(double w){
-      weight = w;
-   }//end setWeight method
-   
-   //getPolicyNumber method
-   /**
-      method that gets policy number
-      @return the policy number 
-   */
    public int getPolicyNumber(){
       return policyNumber;
    }//end getPolicyNumber method
@@ -139,65 +63,7 @@ public class Policy{
       return providerName;
    }//end getProviderName method
    
-   //getFirstName method
-   /**
-      method that gets first name
-      @return the first name of the policyholder 
-   */
-
-   public String getFirstName(){
-      return firstName;
-   }//end getFirstName method
    
-   //getLastName method
-   /**
-      method that gets last name
-      @return the policyholder last name 
-   */
-
-   public String getLastName(){
-      return lastName;
-   }//end getLastName method
-   
-   //getAge method
-   /**
-      method that gets age
-      @return the policyholder's age 
-   */
-
-   public int getAge(){
-      return age;
-   }//end getAge method
-   
-   //getSmokingStatus method
-   /**
-      method that gets smoking status
-      @return the policyholder's smoking status 
-   */
-
-   public String getSmokingStatus(){
-      return smokingStatus;
-   }//end getSmokingStatus method
-   
-   //getHeight method
-   /**
-      method that gets height
-      @return the policyholders's height 
-   */
-
-   public double getHeight(){
-      return height;
-   }//end getHeight method
-   
-   //getWeight method
-   /**
-      method that gets weight
-      @return the policyholders's weight 
-   */
-
-   public double getWeight(){
-      return weight;
-   }//end getWeight method
    
    /**
       method that gets BMI
@@ -205,6 +71,8 @@ public class Policy{
    */
    
    public double getBMI(){
+   double height = policyHolder.getHeight();
+   double weight = policyHolder.getWeight();
    double BMI = (weight * 703)/(height * height);
    return BMI;
    }
@@ -216,13 +84,13 @@ public class Policy{
       double basePrice = 600.00;
       double price = 0;
       double BMI = getBMI();
-      if(age > 50){
+      if(policyHolder.getAge() > 50){
          price = basePrice + 75.00;
          }
       else{
          price = basePrice;
          }
-      if(smokingStatus.equalsIgnoreCase("smoker")){
+      if(policyHolder.getSmokingStatus().equalsIgnoreCase("smoker")){
             price = price + 100.00;
          }
       else{
@@ -235,5 +103,11 @@ public class Policy{
          price = price;
          }
          return price;
+      }
+      public String toString(){
+         return "\nPolicy Number: " + getPolicyNumber() +
+         "\nProvider Name: " + getProviderName() + policyHolder +
+         "\nPolicyholder's BMI: " + getBMI() +
+         "\nPolicy Price: $" + getPrice() + "\n\n";
       }
    }//end Policy class
